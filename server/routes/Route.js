@@ -1,9 +1,9 @@
-const { Controller } = require('../controller/controller');
 const router = require('express').Router();
+const userController = require('../controller/controller.js');
 
-const controller = new Controller();
-
-router.route('/api')
-   .post('/login', controller.create)
-
-module.exports = { router }   
+router
+   .post('/create', userController.createStudent)
+   .get('/find', userController.findStudent)
+   .post('/update', userController.updateStudent)
+   .post('/delete', userController.deleteStudent);
+module.exports = { router };

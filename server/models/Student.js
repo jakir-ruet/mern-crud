@@ -7,8 +7,8 @@ const studentSchema = new Schema({
       required: true,
       trim: true,
       validate: {
-         validator: nameValidator,
-         message: n => nameValidator(n)['name']
+         validator: v => nameValidator(v).isValidate,
+         message: n => nameValidator(n.value).name
       }
    },
    fatherName: {
@@ -16,14 +16,14 @@ const studentSchema = new Schema({
       required: true,
       trim: true,
       validate: {
-         validator: nameValidator,
+         validator: v => nameValidator(v)['isValidate'],
          message: n => nameValidator(n)['name']
       }
    },
    age: {
       type: Number,
       validate: {
-         validator: ageValidator,
+         validator: v => ageValidator(v)['isValidate'],
          message: a => ageValidator(a)['age']
       }
    }

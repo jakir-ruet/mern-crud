@@ -1,22 +1,46 @@
-const { Student } = require("../models/Student");
+const { Student } = require('../models/Student.js');
 
-class Controller {
-   create(req, res) {
-      let { body } = body;
-      if (Object.keys(body) == 0 || !body) {
-         res.status(400).send("No data accepted from user");
-      }
-      else {
-         Student.create({
-            name: body.name,
-            fatherName: body.fatherName,
-            age: body.age
-         })
-            .then(() => res.status(201).send("Student created"))
-            .catch(err => res.status(400).send(`Validation error ${err.message}`))
-      }
-      Student.create()
+const userController = {
+   createStudent: ({ body }, res) => {
+      const { name, fatherName, email } = body;
+      (!body || Object.keys(body).length === 0)
+         ? res.status(404).send('All data required') : (() => {
+            Student.create({ name, fatherName, email })
+               .then(() => res.status(201).send('Student created'))
+               .catch(err => res.status(400).send(`${err}`));
+         })();
+   },
+   findStudent: ({ body: { email } }, res) => {
+      Student.findOne({ email }, (err, doc) => {
+         err ? (() => { throw err })() :
+            !doc ? res.status(404).send('email not found') :
+               (() => {
+                  Student.findOne({ email }, {}, (err, doc) => {
+                     err ? (() => { throw err })() : res.status(200).json(doc);
+                  });
+               })();
+      })
+   },
+   updateStudent: ({ body: { email, update } }, res) => {
+      Student.findOne({ email }, (err, doc) => {
+         err ? (() => { throw err })() :
+            !doc ? res.status(400).send('email not found') :
+               !update ? res.status(400).send('update required for updating') :
+                  update.email ? res.status(400).send('You cannot update email') : (() => {
+                     Student.findOneAndUpdate({ email }, update)
+                        .then(() => res.status(200).send('Student updated'))
+                        .catch(err => res.status(400).send(`Error occurred: ${err.message}`))
+                  })();
+      })
+   },
+   deleteStudent: ({ body: { email } }, res) => {
+      Student.findOne({ email }, {}, (err, doc) => {
+         err ? (() => console.log(err.message))() :
+            !doc ? res.status(400).send('email not found') :
+               Student.findOneAndDelete({ email })
+                  .then(() => res.status(200).send('Student deleted'))
+      });
    }
 }
 
-module.exports = { Controller };
+module.exports = userController;
