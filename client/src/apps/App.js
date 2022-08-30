@@ -65,9 +65,9 @@ function App() {
                     <td className='text-center'>Five</td>
                     <td className='text-center'>39</td>
                     <td className='text-end'>
-                      <div class="btn-group" role="group" aria-label="groupbtn">
-                        <button type="button" class="btn btn-primary">Edit</button>
-                        <button type="button" class="btn btn-danger">Delete</button>
+                      <div className="btn-group" role="group" aria-label="groupbtn">
+                        <button type="button" className="btn btn-primary">Edit</button>
+                        <button type="button" className="btn btn-danger">Delete</button>
                       </div>
                     </td>
                   </tr>
