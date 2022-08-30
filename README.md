@@ -1,2 +1,0 @@
-# mern-crud
-mern-crud
