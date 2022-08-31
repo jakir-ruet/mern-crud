@@ -7,13 +7,16 @@ module.exports = {
 
       if (!name) {
          errors['name'] = "Name's required";
-      };
+      }
+      ;
       if (!(length < 20)) {
          errors['name'] = "Name's length maxium 20";
-      };
+      }
+      ;
       if (!(length > 3)) {
          errors['name'] = "Name's length must be 3";
-      };
+      }
+      ;
       errors['isValidate'] = Object.keys(errors) == 0;
 
       return errors;
@@ -30,8 +33,9 @@ module.exports = {
       if (!(age > 5)) {
          errors['age'] = "Age's must be 3"
       }
-      errors['isValidate'] = Object.keys(errors) == 0;
+      errors['isValidate'] = Object.keys(errors) === 0;
 
       return errors;
    },
+   phoneValidator: v => length > 10 && length < 16
 }

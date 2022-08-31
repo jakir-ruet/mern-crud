@@ -2,10 +2,10 @@ const { Student } = require('../models/Student.js');
 
 const userController = {
    createStudent: ({ body }, res) => {
-      const { name, fatherName, email } = body;
+      const { name, fatherName, email, age } = body;
       (!body || Object.keys(body).length === 0)
          ? res.status(404).send('All data required') : (() => {
-            Student.create({ name, fatherName, email })
+            Student.create({ name, fatherName, email, age })
                .then(() => res.status(201).send('Student created'))
                .catch(err => res.status(400).send(`${err}`));
          })();
