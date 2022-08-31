@@ -36,6 +36,5 @@ module.exports = {
       errors['isValidate'] = Object.keys(errors) === 0;
 
       return errors;
-   },
-   phoneValidator: v => length > 10 && length < 16
+   }
 }
