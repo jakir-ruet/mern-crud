@@ -47,14 +47,11 @@ const userController = {
       });
    },
    getAll: (_, res) => {
-      try {
-         Student.find({}, user => {
-            res.status(200).send(user)
-         });
-      }
-      catch (err) {
-         res.status(400).send(err.message)
-      }
+      Student.find({}, function (err, students) {
+         if (err) throw err
+         else
+            res.status(200).send(students)
+      });
    }
 }
 
