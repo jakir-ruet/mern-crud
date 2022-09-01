@@ -26,6 +26,11 @@ const studentSchema = new Schema({
          validator: v => ageValidator(v)['isValidate'],
          message: a => ageValidator(a)['age']
       }
+   },
+   email: {
+      type: String,
+      unique: [true, "Email's unique"],
+      required: [true, "Email's required"]
    }
 });
 

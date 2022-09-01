@@ -10,13 +10,17 @@ const userController = {
                .catch(err => res.status(400).send(`${err}`));
          })();
    },
-   findStudent: ({ body: { email } }, res) => {
-      Student.findOne({ email }, (err, doc) => {
+   findStudent: ({ body, query }, res) => {
+      Student.findOne(body, (err, doc) => {
          err ? (() => { throw err })() :
             !doc ? res.status(404).send('email not found') :
                (() => {
-                  Student.findOne({ email }, {}, (err, doc) => {
-                     err ? (() => { throw err })() : res.status(200).json(doc);
+                  Student.findOne(body, {}, (err, doc) => {
+                     err ? (() => { throw err })() : (() => {
+                        !query.prop ?
+                           res.status(200).json(doc) :
+                           res.status(200).json(doc[prop]);
+                     });
                   });
                })();
       })

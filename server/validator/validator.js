@@ -25,10 +25,10 @@ module.exports = {
          errors['age'] = "Age's required"
       }
       if (!(age < 18)) {
-         errors['age'] = "Age's maxium 20"
+         errors['age'] = "Age's maxium 18"
       }
       if (!(age > 5)) {
-         errors['age'] = "Age's must be 3"
+         errors['age'] = "Age's must be 5"
       }
       errors['isValidate'] = Object.keys(errors) == 0;
 
