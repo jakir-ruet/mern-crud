@@ -5,5 +5,6 @@ router
    .post('/create', userController.createStudent)
    .get('/find', userController.findStudent)
    .post('/update', userController.updateStudent)
-   .post('/delete', userController.deleteStudent);
+   .post('/delete', userController.deleteStudent)
+   .get('/findAll', userController.getAll);
 module.exports = { router };
