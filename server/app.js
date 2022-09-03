@@ -1,4 +1,3 @@
-
 const express = require('express');
 const bodyParser = require('body-parser');
 const config = require('./config/config.json');
@@ -13,6 +12,7 @@ app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(router);
+
 // app.use((_, res) => res.status(200).send("Hello World!"))
 
 //listing configuration

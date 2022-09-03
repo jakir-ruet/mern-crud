@@ -3,6 +3,7 @@ const { Student } = require('../models/Student.js');
 
 const userController = {
    createStudent: ({ body }, res) => {
+      res.set('Access-Control-Allow-Origin', '*');
       const { name, fatherName, email } = body;
       (!body || Object.keys(body).length === 0)
          ? res.status(404).send('All data required') : (() => {
@@ -12,6 +13,7 @@ const userController = {
          })();
    },
    findStudent: ({ body, query }, res) => {
+      res.set('Access-Control-Allow-Origin', '*');
       Student.findOne(body, (err, doc) => {
          err ? (() => { throw err })() :
             !doc ? res.status(404).send('email not found') :
@@ -27,6 +29,7 @@ const userController = {
       })
    },
    updateStudent: ({ body: { email, update } }, res) => {
+      res.set('Access-Control-Allow-Origin', '*');
       Student.findOne({ email }, (err, doc) => {
          err ? (() => { throw err })() :
             !doc ? res.status(400).send('email not found') :
@@ -39,6 +42,7 @@ const userController = {
       })
    },
    deleteStudent: ({ body: { email } }, res) => {
+      res.set('Access-Control-Allow-Origin', '*');
       Student.findOne({ email }, {}, (err, doc) => {
          err ? (() => console.log(err.message))() :
             !doc ? res.status(400).send('email not found') :
@@ -47,6 +51,7 @@ const userController = {
       });
    },
    getAll: (_, res) => {
+      res.set('Access-Control-Allow-Origin', '*');
       Student.find({}, function (err, students) {
          if (err) throw err
          else
